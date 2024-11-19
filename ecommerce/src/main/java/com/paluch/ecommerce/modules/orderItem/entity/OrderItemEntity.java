@@ -1,5 +1,6 @@
-package com.paluch.ecommerce.modules.cart.entities;
+package com.paluch.ecommerce.modules.orderItem.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -7,8 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,29 +16,30 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import com.paluch.ecommerce.modules.user.entities.User;
-import com.paluch.ecommerce.modules.address.entities.Address;
-import com.paluch.ecommerce.modules.cart.enums.CartStatus;
+import com.paluch.ecommerce.modules.order.entity.OrderEntity;
+import com.paluch.ecommerce.modules.product.entity.ProductEntity;
 
-@Entity(name = "cart")
+@Entity(name = "order_item")
 @Data
-public class Cart {
+public class OrderItemEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  @JoinColumn(name = "order_id", nullable = false)
+  private OrderEntity order;
 
   @ManyToOne
-  @JoinColumn(name = "address_id", nullable = false)
-  private Address address;
+  @JoinColumn(name = "product_id", nullable = false)
+  private ProductEntity product;
 
-  @NotNull(message = "O status do carrinho não pode ser nulo")
-  @Enumerated(EnumType.STRING)
-  private CartStatus status;
+  @NotNull(message = "A quantidade não pode ser nula")
+  private Integer quantity;
+
+  @NotNull(message = "O preço unitário não pode ser nulo")
+  private BigDecimal price;
 
   @CreationTimestamp
   private LocalDateTime createdAt;

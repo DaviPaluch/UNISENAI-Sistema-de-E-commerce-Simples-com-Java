@@ -1,4 +1,4 @@
-package com.paluch.ecommerce.modules.product.entities;
+package com.paluch.ecommerce.modules.product.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ import lombok.Data;
 
 @Entity(name = "product")
 @Data
-public class Product {
+public class ProductEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,6 +1,5 @@
-package com.paluch.ecommerce.modules.order.entities;
+package com.paluch.ecommerce.modules.cart.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -15,18 +14,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import com.paluch.ecommerce.modules.user.entities.User;
-import com.paluch.ecommerce.modules.cart.entities.Cart;
-import com.paluch.ecommerce.modules.order.enums.OrderStatus;
-import com.paluch.ecommerce.modules.address.entities.Address;
+import com.paluch.ecommerce.modules.address.entity.Address;
+import com.paluch.ecommerce.modules.cart.enums.CartStatus;
+import com.paluch.ecommerce.modules.user.entity.UserEntity;
 
-@Entity(name = "order")
+@Entity(name = "cart")
 @Data
-public class Order {
+public class CartEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,22 +31,15 @@ public class Order {
 
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-
-  @OneToOne
-  @JoinColumn(name = "cart_id", nullable = false)
-  private Cart cart;
+  private UserEntity user;
 
   @ManyToOne
   @JoinColumn(name = "address_id", nullable = false)
   private Address address;
 
-  @NotNull(message = "O status do pedido não pode ser nulo")
-  @Enumerated(EnumType.STRING) // Armazenar como string
-  private OrderStatus status; // Usando a enumeração
-
-  @NotNull(message = "O preço total do pedido não pode ser nulo")
-  private BigDecimal totalPrice;
+  @NotNull(message = "O status do carrinho não pode ser nulo")
+  @Enumerated(EnumType.STRING)
+  private CartStatus status;
 
   @CreationTimestamp
   private LocalDateTime createdAt;

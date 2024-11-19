@@ -1,4 +1,4 @@
-package com.paluch.ecommerce.modules.cartItem.entities;
+package com.paluch.ecommerce.modules.cartItem.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,12 +18,12 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import com.paluch.ecommerce.modules.cart.entities.Cart;
-import com.paluch.ecommerce.modules.product.entities.Product;
+import com.paluch.ecommerce.modules.cart.entity.CartEntity;
+import com.paluch.ecommerce.modules.product.entity.ProductEntity;
 
 @Entity(name = "cart_item")
 @Data
-public class CartItem {
+public class CartItemEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,11 +31,11 @@ public class CartItem {
 
   @ManyToOne
   @JoinColumn(name = "cart_id", nullable = false)
-  private Cart cart;
+  private CartEntity cart;
 
   @OneToOne
   @JoinColumn(name = "product_id", nullable = false)
-  private Product product;
+  private ProductEntity product;
 
   @NotNull(message = "A quantidade do produto não pode ser nula")
   @Min(value = 1, message = "A quantidade deve ser pelo menos 1")

@@ -1,4 +1,4 @@
-package com.paluch.ecommerce.modules.payment.entities;
+package com.paluch.ecommerce.modules.payment.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,13 +18,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import com.paluch.ecommerce.modules.order.entities.Order;
+import com.paluch.ecommerce.modules.order.entity.OrderEntity;
 import com.paluch.ecommerce.modules.payment.enums.PaymentMethod;
 import com.paluch.ecommerce.modules.payment.enums.PaymentStatus;
 
 @Entity(name = "payment")
 @Data
-public class Payment {
+public class PaymentEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,7 +32,7 @@ public class Payment {
 
   @OneToOne
   @JoinColumn(name = "order_id", nullable = false)
-  private Order order;
+  private OrderEntity order;
 
   @NotNull(message = "O valor do pagamento não pode ser nulo")
   private BigDecimal amount;

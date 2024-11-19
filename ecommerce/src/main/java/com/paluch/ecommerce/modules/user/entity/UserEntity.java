@@ -1,4 +1,4 @@
-package com.paluch.ecommerce.modules.user.entities;
+package com.paluch.ecommerce.modules.user.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Entity(name = "user")
 @Data
-public class User {
+public class UserEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

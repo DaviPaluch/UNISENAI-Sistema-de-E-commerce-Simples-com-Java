@@ -1,4 +1,4 @@
-package com.paluch.ecommerce.modules.address.entities;
+package com.paluch.ecommerce.modules.address.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
+
+import com.paluch.ecommerce.modules.user.entity.UserEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +19,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-import com.paluch.ecommerce.modules.user.entities.User;
-
 @Entity(name = "address")
 @Data
 public class Address {
@@ -29,7 +29,7 @@ public class Address {
 
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  private UserEntity user;
 
   @NotBlank(message = "A rua não pode ser vazia")
   @Length(max = 255, message = "A rua deve ter no máximo 255 caracteres")
